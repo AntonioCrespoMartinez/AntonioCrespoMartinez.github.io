@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antonio Crespo Martínez — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0c0f; --surface: #111318; --surface2: #181c22;
+      --green: #00e5a0; --green-dim: #00e5a022; --green-border: #00e5a044;
+      --text: #e8edf5; --muted: #6b7688;
+      --mono: 'Share Tech Mono', monospace; --sans: 'Syne', sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2rem; border-bottom: 1px solid #1e2530;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,12,15,0.92); backdrop-filter: blur(8px);
+    }
+    .nav-logo { font-family: var(--mono); color: var(--green); font-size: 14px; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--green); }
+    .hero { padding: 5rem 2rem 4rem; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    .hero-tag { font-family: var(--mono); font-size: 12px; color: var(--green); border: 1px solid var(--green-border); display: inline-block; padding: 4px 10px; border-radius: 4px; width: fit-content; }
+    .hero-name { font-family: var(--sans); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1; letter-spacing: -1px; color: var(--text); }
+    .hero-name span { color: var(--green); }
+    .hero-subtitle { font-family: var(--mono); font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 520px; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+    .btn-primary { font-family: var(--mono); font-size: 13px; background: var(--green); color: #0a0c0f; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 700; transition: opacity 0.2s; text-decoration: none; display: inline-block; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary { font-family: var(--mono); font-size: 13px; background: transparent; color: var(--green); border: 1px solid var(--green-border); padding: 10px 20px; border-radius: 4px; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+    .btn-secondary:hover { background: var(--green-dim); }
+    .divider { border: none; border-top: 1px solid #1e2530; margin: 0 2rem; }
+    section { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
+    .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+    .section-num { font-family: var(--mono); font-size: 12px; color: var(--green); }
+    .section-title { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .section-line { flex: 1; height: 1px; background: #1e2530; }
+    .about-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .info-card { background: var(--surface); border: 1px solid #1e2530; border-radius: 8px; padding: 1.25rem; }
+    .info-card-label { font-family: var(--mono); font-size: 11px; color: var(--green); margin-bottom: 0.5rem; }
+    .info-card-value { font-size: 14px; color: var(--text); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+    .skill-card { background: var(--surface); border: 1px solid #1e2530; border-radius: 8px; padding: 1.25rem 1rem; transition: border-color 0.2s, background 0.2s; }
+    .skill-card:hover { border-color: var(--green-border); background: var(--surface2); }
+    .skill-name { font-family: var(--mono); font-size: 13px; color: var(--text); margin-bottom: 0.75rem; }
+    .skill-bar-track { height: 3px; background: #1e2530; border-radius: 2px; }
+    .skill-bar-fill { height: 100%; border-radius: 2px; background: var(--green); }
+    .skill-level { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 6px; }
+    .lang-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .lang-badge { font-family: var(--mono); font-size: 12px; background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); padding: 4px 12px; border-radius: 4px; }
+    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    .project-card { background: var(--surface); border: 1px solid #1e2530; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s; position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--green); opacity: 0; transition: opacity 0.2s; }
+    .project-card:hover { border-color: var(--green-border); }
+    .project-card:hover::before { opacity: 1; }
+    .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+    .project-name { font-size: 15px; font-weight: 700; color: var(--text); }
+    .project-type { font-family: var(--mono); font-size: 11px; color: var(--green); }
+    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag { font-family: var(--mono); font-size: 11px; color: var(--muted); background: #181c22; border: 1px solid #252b35; padding: 3px 8px; border-radius: 4px; }
+    .terminal-line { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 2rem; }
+    .terminal-line::before { content: '> '; color: var(--green); }
+    footer { border-top: 1px solid #1e2530; padding: 2rem; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    footer span { color: var(--green); }
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } .nav-links { gap: 1rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">antonio.dev</span>
+  <div class="nav-links">
+    <a href="#sobre">sobre mí</a>
+    <a href="#habilidades">habilidades</a>
+    <a href="#proyectos">proyectos</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Disponible para trabajar</span>
+  <h1 class="hero-name">Antonio<br>Crespo <span>Martínez</span></h1>
+  <p class="hero-subtitle">Desarrollador de aplicaciones multiplataforma. Apasionado por el código limpio, los datos y la inteligencia artificial.</p>
+  <div class="hero-cta">
+    <a href="#proyectos" class="btn-primary">ver proyectos</a>
+    <button class="btn-secondary" onclick="navigator.clipboard.writeText('antoniocrm2005@gmail.com').then(()=>{this.textContent='¡copiado!';setTimeout(()=>this.textContent='antoniocrm2005@gmail.com',2000)})" style="cursor:pointer;">antoniocrm2005@gmail.com</button>
+    <a href="https://github.com/AntonioCrespoMartinez" target="_blank" class="btn-secondary">github →</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="sobre">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">sobre mí</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="terminal-line">whoami</p>
+  <p class="about-text">Desarrollador junior con formación en DAM y actualmente especializándome en Inteligencia Artificial y Big Data. Cuento con experiencia práctica en desarrollo PHP y una base sólida en Java, SQL y tecnologías web. Carné de conducir tipo B y disponibilidad de incorporación inmediata.</p>
+  <div class="about-grid">
+    <div class="info-card">
+      <div class="info-card-label">ubicación</div>
+      <div class="info-card-value">Montijo, Badajoz</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-label">formación actual</div>
+      <div class="info-card-value">IA y Big Data — IES Albarregas</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-label">experiencia</div>
+      <div class="info-card-value">Prácticas DAM — Grupo Albatros</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-label">idiomas</div>
+      <div class="info-card-value">
+        <div class="lang-row">
+          <span class="lang-badge">ES nativo</span>
+          <span class="lang-badge">EN medio</span>
+          <span class="lang-badge">PT medio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="habilidades">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">habilidades técnicas</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="terminal-line">ls skills/</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-name">Java</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+      <div class="skill-level">medio / alto</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">SQL</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+      <div class="skill-level">medio / alto</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">HTML</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+      <div class="skill-level">medio / alto</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">CSS</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+      <div class="skill-level">medio / alto</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">PHP</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
+      <div class="skill-level">medio</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">JavaFX</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:60%"></div></div>
+      <div class="skill-level">medio</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">C</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:35%"></div></div>
+      <div class="skill-level">básico</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="proyectos">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">proyectos</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="terminal-line">git log --oneline</p>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-name">Aplicación interna — Grupo Albatros</span>
+        <span class="project-type">prácticas</span>
+      </div>
+      <p class="project-desc">Colaboración en el desarrollo de una aplicación web interna. Participación en lógica de negocio, consultas a base de datos y pruebas funcionales dentro de un equipo profesional.</p>
+      <div class="project-tags">
+        <span class="tag">PHP</span>
+        <span class="tag">SQL</span>
+        <span class="tag">HTML/CSS</span>
+      </div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-name">Gacha-Fit</span>
+        <span class="project-type">tfg</span>
+      </div>
+      <p class="project-desc">Aplicación de escritorio que gamifica el deporte mediante un sistema gacha. Desarrollada en Java, SQL y XML como Trabajo de Fin de Grado de DAM.</p>
+      <div class="project-tags">
+        <span class="tag">JAVA</span>
+        <span class="tag">SQL</span>
+        <span class="tag">XML</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>hecho por Antonio Crespo Martínez &middot; <span>antoniocrm2005@gmail.com</span></p>
+</footer>
+
+</body>
+</html>
